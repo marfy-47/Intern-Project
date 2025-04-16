@@ -1,0 +1,6 @@
+Recap the oop 5 topic.
+Abstraction
+Encapsulation
+Inheritance
+Polymorphism
+Composition
