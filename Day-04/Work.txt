@@ -1,0 +1,5 @@
+Task-01: Its about QnA for my work so far starting, I got answer where i stuck. 
+# Details idea about springboot structure, Controller,DTO.
+#Sequencial use of folder.
+# Why we use dependency. 
+Task-02: Amir vai gave to read the documentation about springboot . Its about 2 hours long. 
