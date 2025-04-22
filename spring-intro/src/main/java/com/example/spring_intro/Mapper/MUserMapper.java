@@ -1,5 +1,6 @@
-package com.example.spring_intro;
+package com.example.spring_intro.Mapper;
 
+import com.example.spring_intro.DTO.MUserDTO;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -17,8 +18,8 @@ public class MUserMapper {
         return user;
     }
 
-    public com.example.spring_intro.MUserDTO map(org.spring.intro.MUser entity) {
-        com.example.spring_intro.MUserDTO dto = new org.spring.intro.MUserDTO();
+    public MUserDTO map(org.spring.intro.MUser entity) {
+        MUserDTO dto = new org.spring.intro.MUserDTO();
         dto.setEmail(entity.getEmail());
         dto.setName(entity.getName());
         dto.setPhoneNumber(entity.getPhoneNumber());

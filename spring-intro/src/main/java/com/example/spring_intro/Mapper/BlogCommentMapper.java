@@ -1,4 +1,4 @@
-package com.example.spring_intro;
+package com.example.spring_intro.Mapper;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;

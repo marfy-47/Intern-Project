@@ -1,15 +1,16 @@
-package com.example.spring_intro;
+package com.example.spring_intro.Controller;
 
-import org.spring.intro.MUserDTO;
+import com.example.spring_intro.DTO.MUserDTO;
+import com.example.spring_intro.Service.MUserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class Controller {
-    private final com.example.spring_intro.MUserService userService;
-    private org.spring.intro.MUserDTO MUserDTO;
+    private final MUserService userService;
+    private MUserDTO MUserDTO;
 
-    public Controller(com.example.spring_intro.MUserService userService) {
+    public Controller(MUserService userService) {
         this.userService = userService;
     }
 
@@ -19,7 +20,7 @@ public class Controller {
     }
 
     @GetMapping("/api/v1/user/{id}")
-    public ResponseEntity<org.spring.intro.MUserDTO> getUserById(@PathVariable("id") Long id) {
+    public ResponseEntity<MUserDTO> getUserById(@PathVariable("id") Long id) {
         return userService.findById(id);
     }
 
