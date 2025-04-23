@@ -1,6 +1,7 @@
 package com.example.spring_intro.Controller;
 
 import com.example.spring_intro.DTO.MUserDTO;
+import com.example.spring_intro.Entity.MUser;
 import com.example.spring_intro.Service.MUserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,8 +21,8 @@ public class Controller {
     }
 
     @GetMapping("/api/v1/user/{id}")
-    public ResponseEntity<MUserDTO> getUserById(@PathVariable("id") Long id) {
-        return userService.findById(id);
+    public MUser getUserById(@PathVariable("id") Long id) {
+        return MUserService.findById(id);
     }
 
     @GetMapping("/")

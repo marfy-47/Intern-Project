@@ -1,6 +1,8 @@
 package com.example.spring_intro.Controller;
 
 import com.example.spring_intro.DTO.BlogDTO;
+import com.example.spring_intro.Dependency.IlligaleException;
+import com.example.spring_intro.Dependency.NotFountException;
 import com.example.spring_intro.Entity.Blog;
 import com.example.spring_intro.Mapper.BlogMapper;
 import com.example.spring_intro.Service.BlogService;
@@ -15,7 +17,7 @@ public class BlogController {
     private final BlogMapper blogMapper;
 
     @PostMapping("/create")
-    public ResponseEntity<BlogDTO> create(@RequestBody BlogDTO dto) throws NotFountException, IlligaleException {
+    public ResponseEntity<BlogDTO> createBlog(@RequestBody BlogDTO dto) throws NotFountException, IlligaleException {
 
         Blog entity = blogMapper.map(dto);
         entity = blogService.save(entity);
@@ -23,12 +25,12 @@ public class BlogController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<BlogDTO> getById(@PathVariable("id") Long id) {
+    public ResponseEntity<BlogDTO> fetchBlog(@PathVariable("id") Long id) {
         return ResponseEntity.ok(blogMapper.map(blogService.findById(id)));
     }
 
     @DeleteMapping("/{id}")
-    public void deleteById(@PathVariable("id") Long id) {
+    public void deleteBlog(@PathVariable("id") Long id) {
         blogService.delete(id);
     }
 
