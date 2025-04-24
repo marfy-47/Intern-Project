@@ -1,7 +1,7 @@
 package com.example.spring_intro.Service;
 
-import com.example.spring_intro.DTO.UserRoleDTO;
-import com.example.spring_intro.Entity.UserRole;
+import com.example.spring_intro.Data.DTO.Entity.UserRole;
+import com.example.spring_intro.Data.DTO.UserRoleDTO; // assuming you have this DTO class
 
 import java.util.List;
 

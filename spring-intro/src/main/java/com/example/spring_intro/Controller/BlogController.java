@@ -1,10 +1,10 @@
 package com.example.spring_intro.Controller;
 
-import com.example.spring_intro.DTO.BlogDTO;
+import com.example.spring_intro.Data.DTO.BlogDTO;
 import com.example.spring_intro.Dependency.IlligaleException;
 import com.example.spring_intro.Dependency.NotFountException;
-import com.example.spring_intro.Entity.Blog;
-import com.example.spring_intro.Mapper.BlogMapper;
+import com.example.spring_intro.Data.DTO.Entity.Blog;
+import com.example.spring_intro.Data.DTO.Mapper.BlogMapper;
 import com.example.spring_intro.Service.BlogService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

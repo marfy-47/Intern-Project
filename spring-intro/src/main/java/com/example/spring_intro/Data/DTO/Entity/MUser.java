@@ -1,4 +1,4 @@
-package com.example.spring_intro.Entity;
+package com.example.spring_intro.Data.DTO.Entity;
 
 import jakarta.persistence.*;
 @Entity

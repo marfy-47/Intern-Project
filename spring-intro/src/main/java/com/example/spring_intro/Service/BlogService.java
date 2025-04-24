@@ -1,7 +1,7 @@
 package com.example.spring_intro.Service;
 
 import com.example.spring_intro.Repo.BlogRepository;
-import com.example.spring_intro.Entity.Blog;
+import com.example.spring_intro.Data.DTO.Entity.Blog;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

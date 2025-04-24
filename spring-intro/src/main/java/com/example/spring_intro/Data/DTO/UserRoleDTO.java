@@ -1,10 +1,12 @@
-package com.example.spring_intro.Entity;
+package com.example.spring_intro.Data.DTO;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+import org.apache.catalina.User;
 
 import java.util.Set;
+
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -13,7 +15,7 @@ import java.util.Set;
 @Getter
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class UserRole {
+public class UserRoleDTO {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,6 +28,9 @@ public class UserRole {
             inverseJoinColumns = @JoinColumn(name="user_id")
     )
     @JsonIgnore
-    private Set<MUser> users;
+    private Set<User> users;
+    private String description;
+
 
 }
+

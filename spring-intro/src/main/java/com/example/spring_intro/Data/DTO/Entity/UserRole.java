@@ -1,14 +1,10 @@
-package com.example.spring_intro.DTO;
+package com.example.spring_intro.Data.DTO.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
-import org.apache.catalina.User;
-import org.springframework.stereotype.Component;
 
-import java.util.List;
-
+import java.util.Set;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -30,9 +26,6 @@ public class UserRole {
             inverseJoinColumns = @JoinColumn(name="user_id")
     )
     @JsonIgnore
-    private Set<User> users;
-    private String description;
-
+    private Set<MUser> users;
 
 }
-

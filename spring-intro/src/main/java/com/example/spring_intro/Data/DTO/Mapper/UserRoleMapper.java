@@ -1,10 +1,7 @@
-package com.example.spring_intro.Mapper;
+package com.example.spring_intro.Data.DTO.Mapper;
 
-import com.example.spring_intro.DTO.UserRoleDTO;
-import com.example.spring_intro.Entity.UserRole;
+import com.example.spring_intro.Data.DTO.Entity.UserRole;
 import org.springframework.stereotype.Component;
-
-import java.util.Optional;
 
 @Component
 public class RoleMapper {

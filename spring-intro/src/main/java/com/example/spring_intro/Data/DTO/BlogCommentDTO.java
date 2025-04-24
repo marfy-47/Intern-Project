@@ -1,4 +1,4 @@
-package com.example.spring_intro.DTO;
+package com.example.spring_intro.Data.DTO;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
