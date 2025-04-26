@@ -1,8 +1,8 @@
 package com.example.spring_intro.Service;
 
 import com.example.spring_intro.Data.DTO.MUserDTO;
-import com.example.spring_intro.Data.DTO.Entity.MUser;
-import com.example.spring_intro.Data.DTO.Mapper.MUserMapper;
+import com.example.spring_intro.Data.Entity.MUser;
+import com.example.spring_intro.Data.Mapper.MUserMapper;
 import com.example.spring_intro.Repo.MUserRepository;
 import org.springframework.stereotype.Service;
 

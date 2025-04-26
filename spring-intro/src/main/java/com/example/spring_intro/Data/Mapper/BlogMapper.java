@@ -1,6 +1,6 @@
-package com.example.spring_intro.Data.DTO.Mapper;
+package com.example.spring_intro.Data.Mapper;
 import com.example.spring_intro.Data.DTO.BlogDTO;
-import com.example.spring_intro.Data.DTO.Entity.Blog;
+import com.example.spring_intro.Data.Entity.Blog;
 import org.springframework.stereotype.Component;
 
 @Component

@@ -1,7 +1,7 @@
 package com.example.spring_intro.Controller;
 
 import com.example.spring_intro.Data.DTO.UserRoleDTO;
-import com.example.spring_intro.Data.DTO.Entity.UserRole;
+import com.example.spring_intro.Data.Entity.UserRole;
 import com.example.spring_intro.Service.UserRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

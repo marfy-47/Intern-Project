@@ -1,4 +1,4 @@
-package com.example.spring_intro.Data.DTO.Entity;
+package com.example.spring_intro.Data.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;

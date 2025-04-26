@@ -1,7 +1,7 @@
 package com.example.spring_intro.Controller;
 
 import com.example.spring_intro.Data.DTO.MUserDTO;
-import com.example.spring_intro.Data.DTO.Entity.MUser;
+import com.example.spring_intro.Data.Entity.MUser;
 import com.example.spring_intro.Service.MUserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

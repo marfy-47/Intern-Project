@@ -1,6 +1,6 @@
-package com.example.spring_intro.Data.DTO.Mapper;
+package com.example.spring_intro.Data.Mapper;
 
-import com.example.spring_intro.Data.DTO.Entity.UserRole;
+import com.example.spring_intro.Data.Entity.UserRole;
 import org.springframework.stereotype.Component;
 
 @Component

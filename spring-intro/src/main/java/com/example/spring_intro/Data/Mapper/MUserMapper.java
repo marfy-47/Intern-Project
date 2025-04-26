@@ -1,7 +1,7 @@
-package com.example.spring_intro.Data.DTO.Mapper;
+package com.example.spring_intro.Data.Mapper;
 
 import com.example.spring_intro.Data.DTO.MUserDTO;
-import com.example.spring_intro.Data.DTO.Entity.MUser;
+import com.example.spring_intro.Data.Entity.MUser;
 import org.springframework.stereotype.Component;
 
 @Component
