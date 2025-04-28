@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
+
 public class BlogDTO {
     @JsonProperty(namespace = "blog_title", required = true, defaultValue = "A Title")
     private String title;

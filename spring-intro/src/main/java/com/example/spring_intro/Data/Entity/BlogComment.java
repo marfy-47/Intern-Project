@@ -13,6 +13,11 @@ public class BlogComment {
     @JoinColumn(name = "user_id")
     private MUser viewer;
 
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "blog_id")
+    private Blog blog;
+
     @Column(nullable = false)
     private String content;
 

@@ -5,11 +5,11 @@ import lombok.Data;
 
 @Data
 public class MUserDTO {
-    @JsonProperty(value = "name", required = true, defaultValue = "AUser")
+    @JsonProperty(value = "name",  defaultValue = "AUser")
     private String name;
-    @JsonProperty(value = "phone_number", required = true, defaultValue = "017066")
+    @JsonProperty(value = "phone_number", defaultValue = "017066")
     private  String phoneNumber;
-    @JsonProperty(namespace = "email", required = true, defaultValue = "example@gmail.com")
+    @JsonProperty(namespace = "email", defaultValue = "example@gmail.com")
     private String email;
 
 }

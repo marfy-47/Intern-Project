@@ -1,9 +1,11 @@
 package com.example.spring_intro.Data.DTO;
 
+import com.example.spring_intro.Data.Entity.MUser;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.apache.catalina.User;
+import org.springframework.stereotype.Component;
 
 import java.util.Set;
 
@@ -15,6 +17,7 @@ import java.util.Set;
 @Getter
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+
 public class UserRoleDTO {
 
     @Id
@@ -28,7 +31,7 @@ public class UserRoleDTO {
             inverseJoinColumns = @JoinColumn(name="user_id")
     )
     @JsonIgnore
-    private Set<User> users;
+    private Set<MUser> users;
     private String description;
 
 

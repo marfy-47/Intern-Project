@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "user_blog")
+@Table(name = "blog")
 @Data
 public class Blog {
 
@@ -15,10 +15,9 @@ public class Blog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
     private String title;
 
-    @Column(nullable = false, columnDefinition = "blog_content")
+    @Column( columnDefinition = "blog_content")
     private String content;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -29,7 +28,7 @@ public class Blog {
 
     private Date updatedAt;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy ="blog", cascade = CascadeType.ALL)
     private List<BlogComment> comment;
 
     private Double rating;

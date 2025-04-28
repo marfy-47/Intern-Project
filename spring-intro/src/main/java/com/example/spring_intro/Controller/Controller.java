@@ -22,7 +22,7 @@ public class Controller {
 
     @GetMapping("/api/v1/user/{id}")
     public MUser getUserById(@PathVariable("id") Long id) {
-        return MUserService.findById(id);
+        return userService.findById(id);
     }
 
     @GetMapping("/")

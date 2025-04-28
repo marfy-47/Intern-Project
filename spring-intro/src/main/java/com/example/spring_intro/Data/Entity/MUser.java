@@ -1,8 +1,14 @@
 package com.example.spring_intro.Data.Entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
+
+import java.util.Date;
+import java.util.List;
+
 @Entity
 @Table(name="users")
+@Data
 public class MUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -11,32 +17,16 @@ public class MUser {
     private String email;
     private String phoneNumber;
 
-    public Long getId() {
-        return id;
-    }
+        @ManyToOne(fetch = FetchType.LAZY)
+        @JoinColumn(nullable = false, name = "user_id")
+        private Blog author;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+        private Date createdAt;
 
-    public String getName() {
-        return name;
-    }
+        private Date updatedAt;
 
-    public void setName(String name) {
-        this.name = name;
+        @OneToMany(mappedBy = "blog", cascade = CascadeType.ALL)
+        private List<BlogComment> comment;
+
+        private Double rating;
     }
-    public String getEmail() {
-        return email;
-    }
-    public void setEmail(String email) {
-        this.email = email;
-    }
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-    
-}

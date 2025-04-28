@@ -25,7 +25,7 @@ public class MUserService {
         muserRepository.save(entity);
     }
 
-    public MUser findById(Long id) {
+    public  MUser findById(Long id) {
         Optional<MUser> user = muserRepository.findById(id);
         return user.orElse(null);
     }
