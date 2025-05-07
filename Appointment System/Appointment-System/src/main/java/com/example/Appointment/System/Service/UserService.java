@@ -1,7 +1,7 @@
 package com.example.Appointment.System.Service;
 
 import com.example.Appointment.System.DTO.UserDTO;
-import com.example.Appointment.System.Entity.MUser;
+import com.example.Appointment.System.Entity.User;
 import com.example.Appointment.System.Entity.User;
 import com.example.Appointment.System.Mapper.UserMapper;
 import com.example.Appointment.System.Repo.PatientRepo;
@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -55,8 +56,8 @@ public class UserService {
         userRepo.deleteById(id);
     }
 
-    public User getUserById(Long id) {
-        Optional<User> mUser=userRepo.findById(id);
+    public MUser getUserById(Long id) {
+        Optional<MUser> mUser=userRepo.findById(id);
         if(mUser.isEmpty()){
             return null;
         }

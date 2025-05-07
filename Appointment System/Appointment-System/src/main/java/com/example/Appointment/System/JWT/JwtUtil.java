@@ -1,6 +1,10 @@
 package com.example.Appointment.System.JWT;
 
 import com.example.Appointment.System.Entity.MUser;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
 import lombok.Value;
 import org.springframework.stereotype.Component;
 

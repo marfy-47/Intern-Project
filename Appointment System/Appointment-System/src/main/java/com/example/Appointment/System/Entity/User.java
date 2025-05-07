@@ -18,14 +18,14 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class MUser {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
     private String userName;
     @Column(nullable = false)
-    private Long mobileNumber;
+    private Long contactNo;
     private String gender;
     private String email;
     @Column(nullable = false)
@@ -45,6 +45,10 @@ public class MUser {
     private List<String> degrees=new ArrayList<>();
     @ManyToMany(mappedBy = "users")
     private Set<UserRole> userRoles;
-    public Object getUsername() {
+    public static Object getUsername() {
+        return null;
+    }
+
+    public void setContact(String contact) {
     }
 }
