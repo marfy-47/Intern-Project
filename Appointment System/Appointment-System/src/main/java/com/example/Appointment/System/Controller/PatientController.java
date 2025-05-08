@@ -1,6 +1,7 @@
 package com.example.Appointment.System.Controller;
 
 import com.example.Appointment.System.DTO.PatientDTO;
+import com.example.Appointment.System.Exception.PatientNotFoundException;
 import com.example.Appointment.System.Mapper.PatientMapper;
 import com.example.Appointment.System.Service.PatientService;
 import lombok.RequiredArgsConstructor;

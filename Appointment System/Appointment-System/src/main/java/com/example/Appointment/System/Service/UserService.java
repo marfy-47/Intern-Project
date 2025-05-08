@@ -2,7 +2,6 @@ package com.example.Appointment.System.Service;
 
 import com.example.Appointment.System.DTO.UserDTO;
 import com.example.Appointment.System.Entity.User;
-import com.example.Appointment.System.Entity.User;
 import com.example.Appointment.System.Mapper.UserMapper;
 import com.example.Appointment.System.Repo.PatientRepo;
 import com.example.Appointment.System.Repo.UserRepo;
@@ -10,25 +9,22 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
 public class UserService {
+
     private final UserRepo userRepo;
     private final PatientRepo patientRepo;
     private final UserMapper userMapper;
+
     public User saveUser(User user) {
-        userRepo.save(user);
-        return user;
+        return userRepo.save(user); // simplified
     }
 
     public User getUserByName(String username) {
-        Optional<User> user=userRepo.findByName(username);
-        if(user==null){
-            return null;
-        }
-        return user.get();
+        Optional<User> user = userRepo.findByName(username);
+        return user.orElse(null); // corrected
     }
 
     public boolean isExitUserById(Long id) {
@@ -36,31 +32,28 @@ public class UserService {
     }
 
     public User updateUser(Long id, UserDTO userDTO) {
-        Optional<User> mUser=userRepo.findById(id);
-        if(mUser.isEmpty()){
+        Optional<User> userOptional = userRepo.findById(id);
+        if (userOptional.isEmpty()) {
             return null;
         }
-        mUser.get().setEmail(userDTO.getEmail());
-        mUser.get().setDateOfBirth(userDTO.getDateOfBirth());
-        mUser.get().setGender(userDTO.getGender());
-        mUser.get().setContact(userDTO.getContact());
-        mUser.get().setPassword(userDTO.getPassword());
-        userRepo.save(mUser.get());
-        return mUser.get();
+
+        User user = userOptional.get();
+        user.setEmail(userDTO.getEmail());
+        user.setDateOfBirth(userDTO.getDateOfBirth());
+        user.setGender(userDTO.getGender());
+        user.setContact(userDTO.getContact());
+        user.setPassword(userDTO.getPassword());
+
+        return userRepo.save(user); // save and return updated user
     }
 
     public void deleteUser(Long id) {
-        if(!userRepo.existsById(id)){
-            return;
+        if (userRepo.existsById(id)) {
+            userRepo.deleteById(id);
         }
-        userRepo.deleteById(id);
     }
 
-    public MUser getUserById(Long id) {
-        Optional<MUser> mUser=userRepo.findById(id);
-        if(mUser.isEmpty()){
-            return null;
-        }
-        return mUser.get();
+    public User getUserById(Long id) {
+        return userRepo.findById(id).orElse(null);
     }
 }

@@ -1,7 +1,8 @@
 package com.example.Appointment.System.JWT;
+import com.example.Appointment.System.Entity.User;
 import com.example.Appointment.System.Exception.UserNotFoundException;
 import com.example.Appointment.System.JWT.JwtUtil;
-import com.example.Appointment.System.Entity.MUser;
+import com.example.Appointment.System.Entity.User;
 import com.example.Appointment.System.Repo.UserRepo;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -23,7 +24,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class JwtAuthFilter extends OncePerRequestFilter {
 
-    private final JwtUtils jwtUtils;
+    private final JwtUtil jwtUtils;
     private final UserDetailsService userDetailsService;
     private final UserRepo userRepo;
 
@@ -46,7 +47,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-            Optional<MUser> user = userRepo.findByName(username);
+            Optional<User> user = userRepo.findByName(username);
             if(user.isEmpty())
             {
                 throw new UserNotFoundException("User doesn't exit..");

@@ -1,16 +1,12 @@
 package com.example.Appointment.System.Entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "users")
@@ -19,20 +15,27 @@ import java.util.Set;
 @NoArgsConstructor
 @Builder
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(nullable = false)
     private String userName;
+
     @Column(nullable = false)
     private Long contactNo;
+
     private String gender;
     private String email;
+
     @Column(nullable = false)
     private String password;
+
     @Column(nullable = false)
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfBirth;
+
     private String profession;
     private String specialization;
     private Integer yearsOfExperience;
@@ -42,13 +45,14 @@ public class User {
     private double rating;
     private String role;
     private String profilePictureUrl;
-    private List<String> degrees=new ArrayList<>();
-    @ManyToMany(mappedBy = "users")
-    private Set<UserRole> userRoles;
-    public static Object getUsername() {
-        return null;
-    }
 
-    public void setContact(String contact) {
-    }
+    @ElementCollection
+    private List<String> degrees = new ArrayList<>();
+
+    @ManyToMany(mappedBy = "users", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JsonIgnore
+    private Set<UserRole> userRoles = new HashSet<>();
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Patient patientProfile;
 }

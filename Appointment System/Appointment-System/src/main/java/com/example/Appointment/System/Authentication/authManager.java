@@ -21,5 +21,3 @@ public PasswordEncoder passwordEncoder() {
     return new BCryptPasswordEncoder();
 }
 
-public void main() {
-}
