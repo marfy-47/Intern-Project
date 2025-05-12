@@ -1,4 +1,4 @@
-package com.example.Appointment.System.Entity;
+package com.example.Appointment.System.DATA.Entity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -26,5 +26,5 @@ public class UserRole {
             joinColumns = @JoinColumn(name = "role_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
-    private Set<User> users = new HashSet<>();
+    private Set<MUser> users = new HashSet<>();
 }

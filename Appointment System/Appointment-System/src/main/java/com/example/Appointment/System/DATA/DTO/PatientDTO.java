@@ -1,4 +1,4 @@
-package com.example.Appointment.System.DTO;
+package com.example.Appointment.System.DATA.DTO;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;

@@ -1,8 +1,7 @@
-package com.example.Appointment.System.DTO;
+package com.example.Appointment.System.DATA.DTO;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Column;
-import jakarta.persistence.Transient;
 import lombok.Builder;
 import lombok.Data;
 

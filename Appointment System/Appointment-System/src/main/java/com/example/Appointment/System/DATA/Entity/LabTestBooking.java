@@ -1,4 +1,4 @@
-package com.example.Appointment.System.Entity;
+package com.example.Appointment.System.DATA.Entity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -14,12 +14,16 @@ import java.time.LocalDate;
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Table(name = "test_booking")
-public class TestBooking {
+public class LabTestBooking {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private LocalDate dateOfBooking;
+    private LocalDate DeliveryDate;
     private String testName;
     private int availableSlot;
+    private String Note;
+
+
 }

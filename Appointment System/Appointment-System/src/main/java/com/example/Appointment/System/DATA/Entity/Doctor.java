@@ -1,4 +1,4 @@
-package com.example.Appointment.System.Entity;
+package com.example.Appointment.System.DATA.Entity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -30,14 +30,18 @@ public class Doctor {
     private Double rating;
     private String gender;
     private String password;
+    private String  licenseNumber;
     private Boolean availabilityStatus;
     private String role;
+
 
 
     @ManyToMany(mappedBy = "doctors",cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<Patient> patients=new HashSet<>();
     @OneToMany(mappedBy = "doctor",fetch = FetchType.LAZY,cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<DoctorBooking> doctorBookings=new HashSet<>();
-
+    public void setPatient(Set<Patient> patients) {
+        this.patients = patients;
+    }
 
 }

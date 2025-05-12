@@ -1,4 +1,4 @@
-package com.example.Appointment.System.Entity;
+package com.example.Appointment.System.DATA.Entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
@@ -46,9 +46,10 @@ public class Patient {
     private String profilePictureUrl;
     private String address;
 
+
     @OneToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    private MUser user;
 
     @ManyToMany
     @JoinTable(
@@ -59,7 +60,7 @@ public class Patient {
     private Set<Doctor> doctors = new HashSet<>();
 
     @OneToMany(mappedBy = "patient", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private Set<TestBooking> labTestBookings = new HashSet<>();
+    private Set<LabTestBooking> labTestBookings = new HashSet<>();
 
     @OneToMany(mappedBy = "patient", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<DoctorBooking> doctorBookings = new HashSet<>();
@@ -67,5 +68,8 @@ public class Patient {
     public Integer getAge() {
         if (this.dateOfBirth == null) return null;
         return Period.between(this.dateOfBirth, LocalDate.now()).getYears();
+    }
+    public void setDoctor(Set<Doctor> doctors) {
+        this.doctors = doctors;
     }
 }

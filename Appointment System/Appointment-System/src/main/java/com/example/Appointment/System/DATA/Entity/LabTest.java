@@ -1,4 +1,4 @@
-package com.example.Appointment.System.Entity;
+package com.example.Appointment.System.DATA.Entity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -12,7 +12,7 @@ import lombok.*;
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Table(name="test")
-public class Test {
+public class LabTest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY )
     private int id;

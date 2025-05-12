@@ -1,8 +1,8 @@
 package com.example.Appointment.System.Service;
 
-import com.example.Appointment.System.DTO.UserDTO;
-import com.example.Appointment.System.Entity.User;
-import com.example.Appointment.System.Mapper.UserMapper;
+import com.example.Appointment.System.DATA.DTO.UserDTO;
+import com.example.Appointment.System.DATA.Entity.MUser;
+import com.example.Appointment.System.DATA.Mapper.MUserMapper;
 import com.example.Appointment.System.Repo.PatientRepo;
 import com.example.Appointment.System.Repo.UserRepo;
 import lombok.RequiredArgsConstructor;
@@ -16,14 +16,14 @@ public class UserService {
 
     private final UserRepo userRepo;
     private final PatientRepo patientRepo;
-    private final UserMapper userMapper;
+    private final MUserMapper userMapper;
 
-    public User saveUser(User user) {
+    public MUser saveUser(MUser user) {
         return userRepo.save(user); // simplified
     }
 
-    public User getUserByName(String username) {
-        Optional<User> user = userRepo.findByName(username);
+    public MUser getUserByName(String username) {
+        Optional<MUser> user = userRepo.findByName(username);
         return user.orElse(null); // corrected
     }
 
@@ -31,13 +31,13 @@ public class UserService {
         return userRepo.existsById(id);
     }
 
-    public User updateUser(Long id, UserDTO userDTO) {
-        Optional<User> userOptional = userRepo.findById(id);
+    public MUser updateUser(Long id, UserDTO userDTO) {
+        Optional<MUser> userOptional = userRepo.findById(id);
         if (userOptional.isEmpty()) {
             return null;
         }
 
-        User user = userOptional.get();
+        MUser user = userOptional.get();
         user.setEmail(userDTO.getEmail());
         user.setDateOfBirth(userDTO.getDateOfBirth());
         user.setGender(userDTO.getGender());
@@ -53,7 +53,7 @@ public class UserService {
         }
     }
 
-    public User getUserById(Long id) {
+    public MUser getUserById(Long id) {
         return userRepo.findById(id).orElse(null);
     }
 }

@@ -1,22 +1,19 @@
 package com.example.Appointment.System.Controller;
 
-import com.example.Appointment.System.DTO.UserDTO;
-import com.example.Appointment.System.Entity.User;
+import com.example.Appointment.System.DATA.DTO.UserDTO;
+import com.example.Appointment.System.DATA.Entity.MUser;
 import com.example.Appointment.System.Exception.UserNotFoundException;
 import com.example.Appointment.System.JWT.JwtUtil;
-import com.example.Appointment.System.Mapper.PatientMapper;
-import com.example.Appointment.System.Mapper.UserMapper;
+import com.example.Appointment.System.DATA.Mapper.PatientMapper;
+import com.example.Appointment.System.DATA.Mapper.MUserMapper;
 import com.example.Appointment.System.Service.PatientService;
 import com.example.Appointment.System.Service.UserService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -25,7 +22,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class UserAuthController {
     private final UserService userService;
-    private final UserMapper userMapper;
+    private final MUserMapper userMapper;
     private final PatientMapper patientMapper;
     private final JwtUtil jwtUtil;
     private final AuthenticationManager authenticationManager;
@@ -41,7 +38,7 @@ public class UserAuthController {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginDTO.getUsername(),loginDTO.getPassword()));
         String token=jwtUtil.generateToken(loginDTO.getUsername());
-        User user=userService.getUserByName(loginDTO.getUsername());
+        MUser user=userService.getUserByName(loginDTO.getUsername());
         user.setIsActive(true);
         userService.saveUser(user);
         return ResponseEntity.ok(token);
@@ -55,7 +52,7 @@ public class UserAuthController {
         }
         String token = authHeader.substring(7);
         String username=jwtUtil.extractUsername(token);
-        User user=userService.getUserByName(username);
+        MUser user=userService.getUserByName(username);
         user.setIsActive(false);
         userService.saveUser(user);
         return ResponseEntity.ok("Logout successfully");

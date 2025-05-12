@@ -1,10 +1,15 @@
-package com.example.Appointment.System.Entity;
+package com.example.Appointment.System.DATA.Entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.time.LocalDateTime;
-
+@Builder
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "doctor_booking")
 public class DoctorBooking {
 
@@ -21,7 +26,19 @@ public class DoctorBooking {
     @ManyToOne
     @JoinColumn(name="patient_id")
     private Patient patient;
+
     @ManyToOne
     @JoinColumn(name = "doctor_id")
     private Doctor doctor;
+
+    public Doctor getDoctor() {
+        return doctor;
+    }
+    public String getNote() {
+        return note;
+    }
+    public String getStatus() {
+        return status;
+    }
+
 }

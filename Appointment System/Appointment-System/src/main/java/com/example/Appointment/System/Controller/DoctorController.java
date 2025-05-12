@@ -1,7 +1,8 @@
 package com.example.Appointment.System.Controller;
 
-import com.example.Appointment.System.DTO.DoctorDTO;
-import com.example.Appointment.System.Mapper.DoctorMapper;
+import com.example.Appointment.System.DATA.DTO.DoctorDTO;
+import com.example.Appointment.System.Exception.DoctorNotFoundException;
+import com.example.Appointment.System.DATA.Mapper.DoctorMapper;
 import com.example.Appointment.System.Service.DoctorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

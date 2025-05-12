@@ -9,15 +9,18 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Bean
 public AuthenticationManager authManager(HttpSecurity http, PasswordEncoder encoder,
                                          UserDetailsService uds) throws Exception {
-    return http.getSharedObject(AuthenticationManagerBuilder.class)
+    var authManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
+    authManagerBuilder
             .userDetailsService(uds)
-            .passwordEncoder(encoder)
-            .and()
-            .build();
+            .passwordEncoder(encoder);
+    return authManagerBuilder.build();
 }
 
 @Bean
 public PasswordEncoder passwordEncoder() {
     return new BCryptPasswordEncoder();
+}
+
+public void main() {
 }
 

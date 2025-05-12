@@ -1,4 +1,4 @@
-package com.example.Appointment.System.DTO;
+package com.example.Appointment.System.DATA.DTO;
 
 import lombok.Builder;
 import lombok.Data;
@@ -13,6 +13,7 @@ public class DoctorDTO {
     private String contactNumber;
     private String email;
     private Integer yearsOfExperience;
+    private String licenseNumber;
     private String hospitalOrClinicName;
     private String address;
     private String languagesSpoken;

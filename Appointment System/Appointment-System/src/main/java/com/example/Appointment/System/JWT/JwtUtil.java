@@ -1,7 +1,6 @@
 package com.example.Appointment.System.JWT;
 
-import com.example.Appointment.System.Entity.User;
-import com.example.Appointment.System.Entity.User;
+import com.example.Appointment.System.DATA.Entity.MUser;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -19,7 +18,7 @@ public class JwtUtil {
     @Value("${jwt.expiration-ms}")
     private long expirationMs;
 
-    public String generateToken(User user) {
+    public String generateToken(MUser user) {
         Date now = new Date();
         Date expiry = new Date(now.getTime() + expirationMs);
         return Jwts.builder()
@@ -34,9 +33,9 @@ public class JwtUtil {
         return parseClaims(token).getSubject();
     }
 
-    public boolean validateToken(String token, User user) {
+    public boolean validateToken(String token, MUser user) {
         String username = extractUsername(token);
-        return username.equals(User.getUsername())
+        return username.equals(MUser.getUsername())
                 && !parseClaims(token).getExpiration().before(new Date());
     }
 
