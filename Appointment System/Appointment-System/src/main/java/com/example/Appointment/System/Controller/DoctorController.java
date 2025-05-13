@@ -1,18 +1,21 @@
-package com.example.Appointment.System.Controller;
+package com.example.Appointment.System.controller;
 
-import com.example.Appointment.System.DATA.DTO.DoctorDTO;
-import com.example.Appointment.System.Exception.DoctorNotFoundException;
-import com.example.Appointment.System.DATA.Mapper.DoctorMapper;
-import com.example.Appointment.System.Service.DoctorService;
+import com.example.Appointment.System.exception.DoctorNotFoundException;
+import com.example.Appointment.System.model.dto.DoctorDTO;
+import com.example.Appointment.System.model.mapper.DoctorMapper;
+import com.example.Appointment.System.service.DoctorService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("api/doctor")
 @RequiredArgsConstructor
+@SecurityRequirement(name = "bearerAuth")
 public class DoctorController {
     private final DoctorService doctorService;
     private final DoctorMapper doctorMapper;
@@ -21,9 +24,10 @@ public class DoctorController {
 
         return ResponseEntity.ok(doctorMapper.toDoctorDTO(
                 doctorService.saveDoctor(doctorMapper.toDoctor(doctorDTO))
-        ));}
+        ));
+    }
     @GetMapping("/fetch/{id}")
-    public ResponseEntity<DoctorDTO> fetchDoctorById(@PathVariable("id") Long id) throws DoctorNotFoundException {
+    public ResponseEntity<DoctorDTO>fetchDoctorById(@PathVariable("id") Long id) throws DoctorNotFoundException {
         if(!doctorService.isExitDoctorById(id)){
             throw new DoctorNotFoundException("Doctor doesn't exits");
         }
@@ -33,7 +37,7 @@ public class DoctorController {
     @PutMapping("/update/{id}")
     public ResponseEntity<DoctorDTO> updateDoctorById(@PathVariable("id") Long id,@RequestBody DoctorDTO doctorDTO) throws DoctorNotFoundException{
         if(!doctorService.isExitDoctorById(id)){
-            throw new DoctorNotFoundException("Doctor doesn't exit");
+            throw new DoctorNotFoundException("Doctor doesn't exits");
         }
         return ResponseEntity.ok(doctorMapper.toDoctorDTO(
                 doctorService.updateDoctorById(id,doctorDTO)));
@@ -44,13 +48,17 @@ public class DoctorController {
             throw new DoctorNotFoundException("Doctor doesn't exits");
         }
         doctorService.deleteDoctorByDoctorId(id);
-        return ResponseEntity.ok("Doctor deleted successfully!!");
+        return ResponseEntity.ok("Doctor deleted successfully!!!");
     }
     @GetMapping("/fetch/all")
-    public ResponseEntity<List<DoctorDTO>> fetchAllDoctors() throws DoctorNotFoundException {
+    public ResponseEntity<Map<String,List<DoctorDTO>>> fetchAllDoctors() throws DoctorNotFoundException {
         if(doctorService.getAllDoctor().isEmpty()){
-            throw new DoctorNotFoundException("Doctor doesn't exits");
+            throw new DoctorNotFoundException("Doctor doesn't exits.");
         }
-        return ResponseEntity.ok(doctorMapper.toDoctorDTOs(doctorService.getAllDoctor()));
+        List<DoctorDTO>doctorDTOS=doctorMapper.toDoctorDTOs(doctorService.getAllDoctor());
+        return ResponseEntity.ok(Map.of(
+                "doctors",doctorDTOS
+        ));
     }
+
 }

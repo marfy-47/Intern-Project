@@ -1,20 +1,19 @@
-package com.example.Appointment.System.Controller;
+package com.example.Appointment.System.controller;
 
-
-import com.example.Appointment.System.DATA.DTO.LabTestBookingDTO;
-import com.example.Appointment.System.DATA.Mapper.LabTestBookingMapper;
-import com.example.Appointment.System.Exception.LabTestBookingNotFoundException;
-import com.example.Appointment.System.Exception.PatientNotFoundException;
-import com.example.Appointment.System.Service.LabTestBookingService;
+import com.example.Appointment.System.exception.LabTestBookingNotFoundException;
+import com.example.Appointment.System.exception.PatientNotFoundException;
+import com.example.Appointment.System.model.dto.LabTestBookingDTO;
+import com.example.Appointment.System.model.mapper.LabTestBookingMapper;
+import com.example.Appointment.System.service.LabTestBookingService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+import java.util.Map;
 
 @RestController
-@RequestMapping("api/lab/test/booking")
+@RequestMapping("/api/lab/test/booking")
 @RequiredArgsConstructor
 @SecurityRequirement(name = "bearerAuth")
 public class LabTestBookingController {
@@ -47,7 +46,7 @@ public class LabTestBookingController {
         return ResponseEntity.ok("LabTestBooking deleted successfully");
     }
     @PutMapping("/update/{id}")
-    public ResponseEntity<LabTestBookingDTO> updateLabTestBookingById(@PathVariable("id") Long id,@RequestBody LabTestBookingDTO labTestBookingDTO) throws LabTestBookingNotFoundException, PatientNotFoundException {
+    public ResponseEntity<LabTestBookingDTO> updateLabTestBookingById(@PathVariable("id") Long id,@RequestBody LabTestBookingDTO labTestBookingDTO) throws LabTestBookingNotFoundException {
         if(!labTestBookingService.isExitLabTestBookingById(id)){
             throw new LabTestBookingNotFoundException("LabTestBooking doesn't exit");
         }
@@ -62,5 +61,12 @@ public class LabTestBookingController {
         return ResponseEntity.ok(
                 labTestBookingMapper.toLabTestBookingDTOS(labTestBookingService.getAllLabTestBooking())
         );
+    }
+
+    @GetMapping("/fetch/all/history")
+    public ResponseEntity<Map<String,List<LabTestBookingDTO>>> fetchAllLabTestBookingHistoryByUser(){
+        return ResponseEntity.ok(Map.of("labTestsBook",labTestBookingMapper.toLabTestBookingDTOS(
+                labTestBookingService.getAllLabTestBookHistoryByUser()
+        )));
     }
 }

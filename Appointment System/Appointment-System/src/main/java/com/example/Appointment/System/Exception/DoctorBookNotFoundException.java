@@ -1,7 +1,7 @@
-package com.example.Appointment.System.Exception;
+package com.example.Appointment.System.exception;
 
 public class DoctorBookNotFoundException extends Throwable {
-    public DoctorBookNotFoundException(String message) {
-        super(message);
-    }
+  public DoctorBookNotFoundException(String message) {
+    super(message);
+  }
 }

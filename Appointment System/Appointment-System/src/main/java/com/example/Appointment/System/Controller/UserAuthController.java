@@ -1,13 +1,14 @@
-package com.example.Appointment.System.Controller;
+package com.example.Appointment.System.controller;
 
-import com.example.Appointment.System.DATA.DTO.UserDTO;
-import com.example.Appointment.System.DATA.Entity.MUser;
-import com.example.Appointment.System.Exception.UserNotFoundException;
-import com.example.Appointment.System.JWT.JwtUtil;
-import com.example.Appointment.System.DATA.Mapper.PatientMapper;
-import com.example.Appointment.System.DATA.Mapper.MUserMapper;
-import com.example.Appointment.System.Service.PatientService;
-import com.example.Appointment.System.Service.UserService;
+import com.example.Appointment.System.exception.UserNotFoundException;
+import com.example.Appointment.System.jwt.filter.JwtUtils;
+import com.example.Appointment.System.model.dto.LoginDTO;
+import com.example.Appointment.System.model.dto.UserDTO;
+import com.example.Appointment.System.model.entity.MUser;
+import com.example.Appointment.System.model.mapper.PatientMapper;
+import com.example.Appointment.System.model.mapper.UserMapper;
+import com.example.Appointment.System.service.PatientService;
+import com.example.Appointment.System.service.UserService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -16,29 +17,31 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 
-
 @RestController
 @RequestMapping("api/user")
 @RequiredArgsConstructor
 public class UserAuthController {
     private final UserService userService;
-    private final MUserMapper userMapper;
+    private final UserMapper userMapper;
     private final PatientMapper patientMapper;
-    private final JwtUtil jwtUtil;
+    private final JwtUtils jwtUtils;
     private final AuthenticationManager authenticationManager;
     private final PatientService patientService;
     @PostMapping("/signup")
     public ResponseEntity<UserDTO> registerUser(@RequestBody UserDTO userDTO){
+        if(userService.isExitUserByContact(userDTO.getEmail())){
+            throw new IllegalArgumentException("This Contact Number is already exit..");
+        }
         return ResponseEntity.ok(
-                userMapper.toUserDTO(userService.saveUser(userMapper.toUser(userDTO)))
+               userMapper.toUserDTO(userService.saveUser(userMapper.toUser(userDTO)))
         );
     }
     @PostMapping("/signin")
     public ResponseEntity<String> loginUser(@RequestBody LoginDTO loginDTO){
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginDTO.getUsername(),loginDTO.getPassword()));
-        String token=jwtUtil.generateToken(loginDTO.getUsername());
-        MUser user=userService.getUserByName(loginDTO.getUsername());
+       authenticationManager.authenticate(
+               new UsernamePasswordAuthenticationToken(loginDTO.getUsername(),loginDTO.getPassword()));
+        MUser user=userService.findUserByContact(loginDTO.getContact());
+        String token=jwtUtils.generateToken(user.getName(),loginDTO.getContact());
         user.setIsActive(true);
         userService.saveUser(user);
         return ResponseEntity.ok(token);
@@ -51,7 +54,7 @@ public class UserAuthController {
             return ResponseEntity.ok("Invalid token");
         }
         String token = authHeader.substring(7);
-        String username=jwtUtil.extractUsername(token);
+        String username=jwtUtils.extractUsername(token);
         MUser user=userService.getUserByName(username);
         user.setIsActive(false);
         userService.saveUser(user);
