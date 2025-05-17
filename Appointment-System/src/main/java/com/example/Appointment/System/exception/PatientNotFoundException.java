@@ -1,4 +1,4 @@
-package com.example.Appointment.System.exception;
+package com.example.Appointment.System.Exception;
 
 public class PatientNotFoundException extends Throwable {
     public PatientNotFoundException(String message) {

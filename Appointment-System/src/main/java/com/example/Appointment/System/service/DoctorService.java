@@ -1,8 +1,7 @@
-package com.example.Appointment.System.service;
-
-import com.example.Appointment.System.model.dto.DoctorDTO;
-import com.example.Appointment.System.model.entity.DoctorProfile;
-import com.example.Appointment.System.repository.DoctorRepo;
+package com.example.Appointment.System.Service;
+import com.example.Appointment.System.DATA.DTO.DoctorDTO;
+import com.example.Appointment.System.DATA.Entity.Doctor;
+import com.example.Appointment.System.Repo.DoctorRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +14,7 @@ import java.util.Optional;
 public class DoctorService {
     private final DoctorRepo doctorRepo;
 
-    public DoctorProfile saveDoctor(DoctorProfile doctorProfile) {
+    public Doctor saveDoctor(Doctor doctorProfile) {
         doctorRepo.save(doctorProfile);
         return doctorProfile;
     }
@@ -24,26 +23,24 @@ public class DoctorService {
         return doctorRepo.existsById(id);
     }
 
-    public DoctorProfile updateDoctorById(Long id, DoctorDTO doctorDTO) {
-        Optional<DoctorProfile> doctor=doctorRepo.findById(id);
+    public Doctor updateDoctorById(Long id, DoctorDTO doctorDTO) {
+        Optional<Doctor> doctor=doctorRepo.findById(id);
         if(doctor.isEmpty()){
             return null;
         }
         doctor.get().setLanguagesSpoken(doctorDTO.getLanguagesSpoken());
         doctor.get().setYearsOfExperience(doctorDTO.getYearsOfExperience());
         doctor.get().setDesignation(doctorDTO.getDesignation());
-        doctor.get().setDegrees(doctorDTO.getDegrees());
         doctor.get().setLicenseNumber(doctorDTO.getLicenseNumber());
-        doctor.get().setDoctorName(doctorDTO.getDoctorName());
         doctor.get().setHospitalOrClinicName(doctorDTO.getHospitalOrClinicName());
         doctor.get().setAvailabilityStatus(doctorDTO.getAvailabilityStatus());
-        doctor.get().setProfilePictureUrl(doctorDTO.getProfilePictureUrl());
+        doctor.get().setDegrees(doctorDTO.getDegrees());
         doctorRepo.save(doctor.get());
         return doctor.get();
     }
 
-    public DoctorProfile getDoctorById(Long id) {
-        Optional<DoctorProfile> doctor=doctorRepo.findById(id);
+    public Doctor getDoctorById(Long id) {
+        Optional<Doctor> doctor=doctorRepo.findById(id);
         if(doctor.isEmpty()){
             return null;
         }
@@ -51,15 +48,15 @@ public class DoctorService {
     }
 
     public void deleteDoctorByDoctorId(Long id) {
-        Optional<DoctorProfile> doctor=doctorRepo.findById(id);
+        Optional<Doctor> doctor=doctorRepo.findById(id);
         if(doctor.isEmpty()){
             return;
         }
         doctorRepo.deleteById(id);
     }
 
-    public List<DoctorProfile> getAllDoctor() {
-        List<DoctorProfile> doctorProfiles = doctorRepo.findAll();
+    public List<Doctor> getAllDoctor() {
+        List<Doctor> doctorProfiles = doctorRepo.findAll();
         if(doctorProfiles.isEmpty()){
             return new ArrayList<>();
         }
