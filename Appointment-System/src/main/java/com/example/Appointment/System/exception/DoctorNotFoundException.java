@@ -1,6 +1,6 @@
-package com.example.Appointment.System.Exception;
+package com.example.Appointment.System.exception;
 
-public class DoctorNotFoundException extends RuntimeException {
+public class DoctorNotFoundException extends Throwable {
     public DoctorNotFoundException(String message) {
         super(message);
     }

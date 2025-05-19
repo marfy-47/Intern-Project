@@ -1,17 +1,19 @@
-package com.example.Appointment.System.Controller;
+package com.example.Appointment.System.controller;
 
-
-import com.example.Appointment.System.DATA.DTO.LabTestDTO;
-import com.example.Appointment.System.Exception.LabTestNotFoundException;
-import com.example.Appointment.System.DATA.Mapper.LabTestMapper;
-import com.example.Appointment.System.Service.LabTestService;
+import com.example.Appointment.System.exception.LabTestNotFoundException;
+import com.example.Appointment.System.model.dto.LabTestDTO;
+import com.example.Appointment.System.model.mapper.LabTestMapper;
+import com.example.Appointment.System.service.LabTestService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Map;
+
 @RestController
-@RequestMapping("api/lab/testing")
+@RequestMapping("/api/lab/testing")
 @SecurityRequirement(name = "bearerAuth")
 @RequiredArgsConstructor
 public class LabTestController {
@@ -25,7 +27,7 @@ public class LabTestController {
     public ResponseEntity<LabTestDTO> registerLabTest(@RequestBody LabTestDTO labTestDTO){
 
         return ResponseEntity.ok(labTestMapper.toLabTestDTO(labTestService.saveLabTest(
-                labTestMapper.toLabTest(labTestDTO))));
+                        labTestMapper.toLabTest(labTestDTO))));
     }
     @GetMapping("/fetch/{id}")
     public ResponseEntity<LabTestDTO> fetchLabTestById(@RequestBody Long id){
@@ -45,13 +47,18 @@ public class LabTestController {
         return ResponseEntity.ok("LabTest deleted successfully");
     }
     @PutMapping("/update/{id}")
-    public ResponseEntity<LabTestDTO> updateLabTestById(@PathVariable("id") Long id, @RequestBody LabTestDTO labTestDTO){
+    public ResponseEntity<LabTestDTO> updateLabTestById(@PathVariable("id") Long id,@RequestBody LabTestDTO labTestDTO){
         if(!labTestService.isExitLabTestById(id)){
             throw new LabTestNotFoundException("LabTest doesn't exit");
         }
         return ResponseEntity.ok(labTestMapper.toLabTestDTO(
                 labTestService.updateLabTest(id,labTestDTO)
         ));
+    }
+    @GetMapping("/fetch/all")
+    public ResponseEntity<Map<String, List<LabTestDTO>>> fetchAllLabTests(){
+
+        return ResponseEntity.ok(Map.of("labTests",labTestMapper.toLabTestDTOS(labTestService.getAllLabTest())));
     }
 
 }

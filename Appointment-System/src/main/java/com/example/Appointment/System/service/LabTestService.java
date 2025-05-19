@@ -1,11 +1,12 @@
-package com.example.Appointment.System.Service;
+package com.example.Appointment.System.service;
 
-import com.example.Appointment.System.DATA.DTO.LabTestDTO;
-import com.example.Appointment.System.DATA.Entity.LabTest;
-import com.example.Appointment.System.Repo.LabTestRepo;
+import com.example.Appointment.System.model.dto.LabTestDTO;
+import com.example.Appointment.System.model.entity.LabTest;
+import com.example.Appointment.System.repository.LabTestRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -46,5 +47,10 @@ public class LabTestService {
         labTest.get().setLabTestImageUrl(labTestDTO.getLabTestImageUrl());
         labTestRepo.save(labTest.get());
         return labTest.get();
+    }
+
+    public List<LabTest> getAllLabTest() {
+
+        return labTestRepo.findAll();
     }
 }

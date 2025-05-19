@@ -1,12 +1,11 @@
-package com.example.Appointment.System.Service;
-
-import com.example.Appointment.System.DATA.DTO.LabTestBookingDTO;
-import com.example.Appointment.System.DATA.Entity.LabTestBooking;
-import com.example.Appointment.System.Repo.LabTestBookingRepo;
+package com.example.Appointment.System.service;
+import com.example.Appointment.System.model.dto.LabTestBookingDTO;
+import com.example.Appointment.System.model.entity.LabTestBooking;
+import com.example.Appointment.System.repository.LabTestBookingRepo;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -14,44 +13,59 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class LabTestBookingService {
-
     private final LabTestBookingRepo labTestBookingRepo;
 
     public LabTestBooking saveLabTestBooking(LabTestBooking labTestBooking) {
-        return labTestBookingRepo.save(labTestBooking);
+        labTestBookingRepo.save(labTestBooking);
+        return labTestBooking;
     }
 
-    public boolean existsLabTestBookingById(Long id) {
+    public boolean isExitLabTestBookingById(Long id) {
         return labTestBookingRepo.existsById(id);
     }
 
     public LabTestBooking getLabTestBookingById(Long id) {
-        return labTestBookingRepo.findById(id).orElse(null);
+        Optional<LabTestBooking> labTestBooking=labTestBookingRepo.findById(id);
+        if(labTestBooking.isEmpty()){
+            return null;
+        }
+        return labTestBooking.get();
     }
 
     public void removeLabTestBookingById(Long id) {
-        if (labTestBookingRepo.existsById(id)) {
-            labTestBookingRepo.deleteById(id);
+        if(!isExitLabTestBookingById(id)){
+            return;
         }
+        labTestBookingRepo.deleteById(id);
     }
 
-    public LabTestBooking modifyLabTestBookingById(Long id, LabTestBookingDTO dto) {
-        Optional<LabTestBooking> optionalBooking = labTestBookingRepo.findById(id);
-        if (optionalBooking.isEmpty()) {
+    public LabTestBooking modifyLabTestBookingById(Long id, LabTestBookingDTO labTestBookingDTO) {
+        Optional<LabTestBooking> labTestBooking=labTestBookingRepo.findById(id);
+        if(labTestBooking.isEmpty()){
             return null;
         }
-
-        LabTestBooking booking = optionalBooking.get();
-        booking.setTestName(dto.getLabTestName());
-        booking.setDateOfBooking(LocalDate.from(dto.getOderDate()));
-        booking.setDeliveryDate(LocalDate.from(dto.getDeliveryDate()));
-        booking.setNote(dto.getNote());
-
-        return labTestBookingRepo.save(booking);
+        labTestBooking.get().setLabTestName(labTestBookingDTO.getLabTestName());
+        labTestBooking.get().setOderDate(labTestBookingDTO.getOderDate());
+        labTestBooking.get().setDeliveryDate(labTestBookingDTO.getDeliveryDate());
+        labTestBooking.get().setNote(labTestBookingDTO.getNote());
+        labTestBookingRepo.save(labTestBooking.get());
+        return labTestBooking.get();
     }
 
-    public List<LabTestBooking> getAllLabTestBookings() {
+    public List<LabTestBooking> getAllLabTestBooking() {
+        List<LabTestBooking> labTestBookings = labTestBookingRepo.findAll();
+        if(labTestBookings.isEmpty()){
+            return new ArrayList<>();
+        }
         return labTestBookingRepo.findAll();
     }
 
+    public List<LabTestBooking> getAllLabTestBookHistoryByUser() {
+        String patientContact = SecurityContextHolder.getContext().getAuthentication().getName();
+        List<LabTestBooking> labTestBookings = labTestBookingRepo.findAllByUserContact(patientContact);
+        if(labTestBookings.isEmpty()){
+            return new ArrayList<>();
+        }
+        return labTestBookings;
+    }
 }
