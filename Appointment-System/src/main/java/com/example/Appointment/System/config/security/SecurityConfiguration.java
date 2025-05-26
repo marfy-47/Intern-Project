@@ -40,6 +40,8 @@ public class SecurityConfiguration {
 //            "/api/doctor/**",
     };
 
+
+
     public static final String[] PUBLIC_URLS = {
             "/api/user/signup",
             "/api/user/signin",
@@ -63,7 +65,9 @@ public class SecurityConfiguration {
             "/history/**"
     };
 
+
     @Bean
+
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception
     {
         System.out.println("I am in Security Filer Chain");
