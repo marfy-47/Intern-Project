@@ -1,14 +1,8 @@
 package com.example.Appointment.System.model.entity;
 
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.time.LocalDate;
-import java.time.Period;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "patients")
@@ -26,7 +20,7 @@ public class PatientProfile {
     private Long id;
     private String patientName;
     @JsonFormat(pattern = "yyyy-MM-dd")
-    private LocalDate dateOfBirth;
+    private java.time.LocalDate dateOfBirth;
     private String profilePictureUrl;
     private String address;
 
@@ -38,12 +32,11 @@ public class PatientProfile {
     @JoinTable(name="patient_vs_doctor",
                joinColumns = @JoinColumn(name="patient_id"),
                inverseJoinColumns = @JoinColumn(name="doctor_id"))
-    private Set<DoctorProfile> doctorProfiles =new HashSet<>();
+    private java.util.Set<DoctorProfile> doctorProfiles = new java.util.HashSet<>();
 
-    @OneToMany(mappedBy = "patientProfile",fetch = FetchType.LAZY,cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private Set<LabTestBooking> labTestBookings=new HashSet<>();
+    @OneToMany(mappedBy = "patientProfile", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private java.util.Set<LabTestBooking> labTestBookings = new java.util.HashSet<>();
 
-    @OneToMany(mappedBy = "patientProfile",fetch = FetchType.LAZY,cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private Set<DoctorBooking>doctorBookings=new HashSet<>();
-
+    @OneToMany(mappedBy = "patientProfile", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private java.util.Set<DoctorBooking> doctorBookings = new java.util.HashSet<>();
 }
