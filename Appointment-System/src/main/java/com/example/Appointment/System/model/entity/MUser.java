@@ -1,13 +1,10 @@
 package com.example.Appointment.System.model.entity;
 
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
-
-import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -32,11 +29,11 @@ public class MUser{
     private String password;
     private String gender;
     @JsonFormat(pattern = "yyyy-MM-dd")
-    private LocalDate dateOfBirth;
+    private  dateOfBirth;
     private Boolean isActive;
     @ManyToMany(mappedBy = "users",fetch=FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @ToString.Exclude
-    private Set<UserRole> userRoles=new HashSet<>();
+    private List<UserRole> userRoles
 
     @OneToOne(mappedBy = "user",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     PatientProfile patientProfile;
