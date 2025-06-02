@@ -4,7 +4,7 @@ import lombok.*;
 
 @Entity
 @Data
-@Table(name="user")
+@Table(name="Consumer")
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
