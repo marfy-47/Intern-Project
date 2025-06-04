@@ -6,7 +6,7 @@
 🛠️ Tech Stack
 # Backend:
 
-    ☕ Java 17
+    ☕ Java 21/Coretto
 
     🚀 Spring Boot
 
