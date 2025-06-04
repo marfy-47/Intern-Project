@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Write Prescription</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/css/Style.css}">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #6dd5ed, #2193b0);
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            background: #ffffff;
+            margin: 50px auto;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+        h2 {
+            text-align: center;
+            color: #333333;
+            margin-bottom: 20px;
+        }
+        input[type="text"],
+        input[type="date"],
+        input[type="number"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border: 1px solid #cccccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+        input[type="text"]:focus,
+        input[type="date"]:focus,
+        input[type="number"]:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #2193b0;
+            outline: none;
+        }
+        .custom-submit-button {
+            width: 100%;
+            background-color: #2193b0;
+            color: white;
+            padding: 12px;
+            margin-top: 15px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        .custom-submit-button:hover {
+            background-color: #176c8f;
+        }
+        .alert-box {
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .alert-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div th:if="${param.message}"
+         th:text="${param.message[0]}"
+         th:class="'alert-box ' + (${param.message[0].contains('successful')} ? 'alert-success' : 'alert-error')">
+    </div>
+
+    <h2>Write a Prescription</h2>
+
+    <form th:action="@{/doctor/write-prescription}" method="post" th:object="${PrescriptionDto}">
+        <input type="date" th:field="*{prescriptionDate}" required>
+        <input type="text" th:field="*{patientName}" placeholder="Enter patient's full name" required>
+        <input type="number" th:field="*{patientAge}" placeholder="Enter age" required min="0" max="120">
+
+        <select th:field="*{patientGender}" required>
+            <option value="" disabled selected>Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+        </select>
+
+        <textarea th:field="*{patientDiagnosis}" rows="3" placeholder="Describe the diagnosis..." required></textarea>
+        <textarea th:field="*{patientMedicines}" rows="4" placeholder="Write medicines..." required></textarea>
+
+        <input type="date" th:field="*{nextVisitDate}" placeholder="Next Visit Date">
+
+        <button type="submit" class="custom-submit-button">Save Prescription</button>
+    </form>
+</div>
+
+</body>
+</html>

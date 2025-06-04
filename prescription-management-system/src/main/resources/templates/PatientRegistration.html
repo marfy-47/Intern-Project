@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Create an account</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" th:href="@{/css/Style.css}">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #6dd5ed, #2193b0);
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 500px;
+      background: #ffffff;
+      margin: 50px auto;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    }
+    h2 {
+      text-align: center;
+      color: #333333;
+      margin-bottom: 20px;
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="date"],
+    input[type="password"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      border: 1px solid #cccccc;
+      border-radius: 8px;
+      box-sizing: border-box;
+      transition: 0.3s;
+    }
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="date"]:focus,
+    input[type="password"]:focus,
+    select:focus,
+    textarea:focus {
+      border-color: #2193b0;
+      outline: none;
+    }
+    .custom-submit-button {
+      width: 100%;
+      background-color: #2193b0;
+      color: white;
+      padding: 12px;
+      margin-top: 15px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s;
+    }
+    .custom-submit-button:hover {
+      background-color: #176c8f;
+    }
+    .link-style {
+      text-align: center;
+      margin-top: 15px;
+      color: #555555;
+    }
+    .link-style a {
+      color: #2193b0;
+      text-decoration: none;
+    }
+    .link-style a:hover {
+      text-decoration: underline;
+    }
+    .alert-box {
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      text-align: center;
+      font-weight: bold;
+    }
+    .alert-success {
+      background-color: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+    .alert-error {
+      background-color: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div th:if="${param.message}"
+       th:text="${param.message[0]}"
+       th:class="'alert-box ' + (${param.message[0].contains('successful')} ? 'alert-success' : 'alert-error')">
+  </div>
+  <h2>Create a Patient Account</h2>
+  <form th:action="@{/registration-patient}" method="post" th:object="${PatientRegistration}" enctype="multipart/form-data">
+    <input type="text" th:field="*{patientName}" placeholder="Full Name" required>
+    <input type="text" th:field="*{patientPhone}" placeholder="Phone Number" required>
+    <input type="text" th:field="*{patientEmail}" placeholder="Email Address">
+    <input type="date" th:field="*{patientBirthDate}" placeholder="Date of Birth" required>
+
+    <select th:field="*{patientGender}" required>
+      <option value="" disabled selected>Select Gender</option>
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+      <option value="Other">Other</option>
+    </select>
+
+    <textarea th:field="*{patientAddress}" placeholder="Address"></textarea>
+    <textarea th:field="*{patientDiseaseHistory}" placeholder="Disease History" required></textarea>
+
+    <input type="password" th:field="*{patientPassword}" placeholder="Password" required>
+    <input type="password" th:field="*{patientConfirmPassword}" placeholder="Confirm Password" required>
+
+    <button type="submit" class="custom-submit-button">Register</button>
+  </form>
+
+  <p class="link-style">Already have an account? <a th:href="@{/login}">Login</a></p>
+</div>
+</body>
+</html>

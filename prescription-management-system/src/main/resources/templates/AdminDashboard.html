@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin Dashboard</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/css/Style.css}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+        .container-dashboard {
+            max-width: 1000px;
+            margin: 30px auto;
+            background: #fff;
+            padding: 20px 30px;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .dashboard-header h2 {
+            font-size: 24px;
+            color: #333;
+        }
+        .header-component a {
+            margin-left: 15px;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+        .link-button {
+            background: #4CAF50;
+            color: white;
+        }
+        .link-button:hover {
+            background: #45A049;
+        }
+        .link-button-logout {
+            background: #f44336;
+            color: white;
+        }
+        .link-button-logout:hover {
+            background: #da190b;
+        }
+        .dashboard-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        .option-card {
+            display: block;
+            text-align: center;
+            padding: 20px;
+            background: #2196F3;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 18px;
+            transition: background 0.3s ease, transform 0.2s;
+        }
+        .option-card:hover {
+            background: #1976D2;
+            transform: translateY(-3px);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container-dashboard">
+    <!-- Header -->
+    <header class="dashboard-header">
+        <h2><span class="user-name" th:text="'Welcome, Admin '+${adminName}">Doctor Name</span></h2>
+        <div class="header-component">
+            <a class="link-button" th:href="@{/admin/account}">My Account</a>
+            <a class="link-button-logout" th:href="@{/user-logout}">Logout</a>
+        </div>
+    </header>
+
+    <!-- Options Section -->
+    <div class="dashboard-options">
+        <a th:href="@{/admin/see-all-user}" class="option-card">See All Users</a>
+        <a th:href="@{/admin/see-all-doctor}" class="option-card">See All Doctors</a>
+        <a th:href="@{/PrescriptionForm}" class="option-card">See All Prescriptions</a>
+    </div>
+</div>
+
+</body>
+</html>

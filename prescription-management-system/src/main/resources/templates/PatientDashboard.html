@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Patient Dashboard</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/css/Style.css}">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #6dd5ed, #2193b0);
+            margin: 0;
+            padding: 0;
+        }
+        .container-dashboard {
+            max-width: 800px;
+            background: #ffffff;
+            margin: 50px auto;
+            padding: 20px 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #eeeeee;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .dashboard-header h2 {
+            margin: 0;
+            color: #333333;
+        }
+        .header-component {
+            display: flex;
+            gap: 10px;
+        }
+        .link-button, .link-button-logout {
+            padding: 8px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .link-button {
+            background-color: #2193b0;
+            color: white;
+        }
+        .link-button:hover {
+            background-color: #176c8f;
+        }
+        .link-button-logout {
+            background-color: #f44336;
+            color: white;
+        }
+        .link-button-logout:hover {
+            background-color: #d32f2f;
+        }
+        .dashboard-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .option-card {
+            background-color: #f7f7f7;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            text-decoration: none;
+            color: #333333;
+            font-size: 16px;
+            min-width: 200px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        .option-card:hover {
+            background-color: #e0f7fa;
+            transform: translateY(-3px);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container-dashboard">
+    <!-- Header -->
+    <header class="dashboard-header">
+        <h2><span class="user-name" th:text="'Welcome, Patient '+${patientName}">Patient Name</span></h2>
+        <div class="header-component">
+            <a class="link-button" th:href="@{/patient/account}">My Account</a>
+            <a class="link-button-logout" th:href="@{/user-logout}">Logout</a>
+        </div>
+    </header>
+
+    <!-- Options Section -->
+    <div class="dashboard-options">
+        <a th:href="@{/patient/see-hospital-infomation}" class="option-card">Hospital Information</a>
+    </div>
+</div>
+
+</body>
+</html>

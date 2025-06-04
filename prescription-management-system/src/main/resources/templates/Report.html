@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Date and Day Count Table</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #ece9e6, #ffffff);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .table-container {
+            background: #ffffff;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            overflow: hidden;
+            max-width: 600px;
+            width: 90%;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background: #3498db;
+            color: white;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: center;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tbody tr:hover {
+            background-color: #e0f7fa;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        caption {
+            caption-side: top;
+            padding: 15px;
+            font-size: 1.5em;
+            font-weight: bold;
+            background: #2980b9;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<div class="table-container">
+    <table>
+        <caption>Date and Day Count</caption>
+        <thead>
+        <tr>
+            <th>Date</th>
+            <th>Day Count</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>2025-06-05</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>2025-06-08</td>
+            <td>2</td>
+        </tr>
+        <tr>
+            <td>2025-06-03</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>2025-06-04</td>
+            <td>0</td>
+        </tr>
+        <!-- More rows here -->
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Write Prescription</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/css/Style.css}">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #5dade2, #a3d8f4);
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: #ffffff;
+            padding: 35px 40px;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        .container::before {
+            content: "";
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(45deg, #3498db, #5dade2);
+            border-radius: 50%;
+            opacity: 0.3;
+        }
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 1;
+        }
+        .alert-box {
+            padding: 12px 18px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            font-size: 15px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .alert-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        form input,
+        form select,
+        form textarea {
+            width: 100%;
+            padding: 12px 16px;
+            margin: 10px 0 18px 0;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            background-color: #f1f1f1;
+            transition: box-shadow 0.3s, transform 0.2s;
+            position: relative;
+            z-index: 1;
+        }
+        form input:focus,
+        form select:focus,
+        form textarea:focus {
+            outline: none;
+            box-shadow: 0 0 10px rgba(52,152,219,0.4);
+            transform: scale(1.02);
+        }
+        .custom-submit-button {
+            background: linear-gradient(45deg, #3498db, #5dade2);
+            color: #ffffff;
+            padding: 14px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s;
+            width: 100%;
+            margin-top: 10px;
+            z-index: 1;
+            position: relative;
+        }
+        .custom-submit-button:hover {
+            background: linear-gradient(45deg, #2e86c1, #3498db);
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div th:if="${param.message}"
+         th:text="${param.message[0]}"
+         th:class="'alert-box ' + (${param.message[0].contains('successful')} ? 'alert-success' : 'alert-error')">
+    </div>
+
+    <h2>Write a Prescription</h2>
+
+    <form th:action="@{/doctor/update-prescription}" method="post" th:object="${PrescriptionDto}">
+        <input type="hidden" th:field="*{prescriptionId}" />
+
+        <input type="date" id="prescriptionDate" name="prescriptionDate" th:value="${PrescriptionDto.prescriptionDate}" required>
+
+        <input type="text" th:field="*{patientName}" placeholder="Patient's Full Name" required>
+
+        <input type="number" th:field="*{patientAge}" placeholder="Age" required min="0" max="120">
+
+        <select th:field="*{patientGender}" required>
+            <option value="" disabled selected>Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+        </select>
+
+        <textarea th:field="*{patientDiagnosis}" rows="3" placeholder="Diagnosis details..."></textarea>
+
+        <textarea th:field="*{patientMedicines}" rows="4" placeholder="Prescribed medicines..."></textarea>
+
+        <input type="date" id="nextVisitDate" name="nextVisitDate" th:value="${PrescriptionDto.nextVisitDate}" required>
+
+        <button type="submit" class="custom-submit-button">Save Changes</button>
+    </form>
+</div>
+
+</body>
+</html>

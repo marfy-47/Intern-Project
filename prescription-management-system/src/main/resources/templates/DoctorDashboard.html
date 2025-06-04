@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Doctor Dashboard</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/css/Style.css}">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f8fb;
+            margin: 0;
+            padding: 0;
+        }
+        .container-dashboard {
+            max-width: 1100px;
+            margin: 40px auto;
+            background-color: #ffffff;
+            padding: 25px 35px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+        .dashboard-header h2 {
+            font-size: 26px;
+            color: #37474f;
+            margin: 0;
+        }
+        .header-component a {
+            margin-left: 12px;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            transition: background 0.3s ease;
+            font-weight: 500;
+        }
+        .link-button {
+            background: #42a5f5;
+            color: #ffffff;
+        }
+        .link-button:hover {
+            background: #1e88e5;
+        }
+        .link-button-logout {
+            background: #ef5350;
+            color: #ffffff;
+        }
+        .link-button-logout:hover {
+            background: #d32f2f;
+        }
+        .dashboard-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .option-card {
+            flex: 1 1 250px;
+            background: linear-gradient(135deg, #4db6ac, #00897b);
+            color: #ffffff;
+            text-align: center;
+            padding: 25px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: 600;
+            transition: transform 0.3s, background 0.3s;
+        }
+        .option-card:hover {
+            background: linear-gradient(135deg, #00897b, #00695c);
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container-dashboard">
+    <!-- Header -->
+    <header class="dashboard-header">
+        <h2><span class="user-name" th:text="'Welcome, Doctor '+${doctorName}">Doctor Name</span></h2>
+        <div class="header-component">
+            <a class="link-button" th:href="@{/doctor/profile}">My Account</a>
+            <a class="link-button-logout" th:href="@{/user-logout}">Logout</a>
+        </div>
+    </header>
+
+    <!-- Options Section -->
+    <div class="dashboard-options">
+        <a th:href="@{/doctor/my-prescriptions}" class="option-card">My Prescriptions</a>
+        <a th:href="@{/doctor/write-prescription}" class="option-card">New Prescription</a>
+        <a th:href="@{/doctor/report}" class="option-card">Day-wise Prescription Count</a>
+    </div>
+</div>
+
+</body>
+</html>

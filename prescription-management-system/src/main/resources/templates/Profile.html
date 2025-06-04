@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Doctor Profile</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .profile-container {
+      background: #f8f9fa;
+      box-shadow: 0 12px 24px rgba(0,0,0,0.3);
+      border-radius: 12px;
+      padding: 40px 30px;
+      max-width: 600px;
+      width: 90%;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .profile-container:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 32px rgba(0,0,0,0.4);
+    }
+
+    h2 {
+      text-align: center;
+      background: linear-gradient(90deg, #0f2027, #203a43, #2c5364);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 25px;
+      font-size: 2.2rem;
+      font-weight: bold;
+    }
+
+    .profile-info {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      row-gap: 12px;
+      column-gap: 12px;
+    }
+
+    .profile-info div {
+      padding: 12px 16px;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+
+    .label {
+      font-weight: bold;
+      color: #ffffff;
+      background: linear-gradient(90deg, #3a3a3a, #4b4b4b);
+      text-align: right;
+    }
+
+    .value {
+      background-color: #ffffff;
+      color: #333333;
+      border: 1px solid #ccc;
+    }
+
+    .value:hover {
+      background-color: #f2f2f2;
+      box-shadow: inset 0 0 5px rgba(0,0,0,0.1);
+    }
+
+    .edit-button {
+      display: block;
+      margin: 30px auto 0;
+      padding: 12px 24px;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: white;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      text-decoration: none;
+      text-align: center;
+      font-size: 1.1em;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      transition: background 0.3s, box-shadow 0.3s, transform 0.2s;
+    }
+
+    .edit-button:hover {
+      background: linear-gradient(135deg, #203a43, #2c5364, #0f2027);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+<div class="profile-container">
+  <h2>Doctor Profile</h2>
+  <div class="profile-info">
+    <div class="label">Name:</div>
+    <div class="value" th:text="${doctor.doctorName}"></div>
+
+    <div class="label">Email:</div>
+    <div class="value" th:text="${doctor.doctorEmail} != null ? ${doctor.doctorEmail} : 'N/A'"></div>
+
+    <div class="label">Phone:</div>
+    <div class="value" th:text="${doctor.doctorPhone}"></div>
+
+    <div class="label">Gender:</div>
+    <div class="value" th:text="${doctor.doctorGender}"></div>
+
+    <div class="label">Address:</div>
+    <div class="value" th:text="${doctor.doctorAddress}"></div>
+
+    <div class="label">Specialization:</div>
+    <div class="value" th:text="${doctor.specialization}"></div>
+
+    <div class="label">Experience:</div>
+    <div class="value" th:text="${doctor.experience} + ' years'"></div>
+
+    <div class="label">Qualification:</div>
+    <div class="value" th:text="${doctor.qualification}"></div>
+  </div>
+
+  <a th:href="@{/doctor/edit-profile}" class="edit-button">Edit Profile</a>
+</div>
+</body>
+</html>
